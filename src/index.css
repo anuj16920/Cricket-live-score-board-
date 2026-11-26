@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --bg-primary: #09090B;
+  --bg-secondary: #111114;
+  --bg-card: #131317;
+  --bg-elevated: #18181D;
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --accent-primary: #38BDF8;
+  --accent-live: #34D399;
+  --accent-boundary: #F59E0B;
+  --accent-wicket: #FB7185;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(56, 189, 248, 0.34);
+}
+
+html,
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Clean Minimalist Card System with Interactive Cursor Spotlight & Sheen */
+.bl-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 28px -18px rgba(0, 0, 0, 0.75);
+  transition: border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bl-card-elevated {
+  position: relative;
+  background: linear-gradient(180deg, #18181E 0%, #121216 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 22px 48px -22px rgba(0, 0, 0, 0.85);
+  transition: border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bl-card-interactive {
+  --mx: 50%;
+  --my: 0%;
+}
+
+.bl-card-interactive::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    280px circle at var(--mx) var(--my),
+    rgba(56, 189, 248, 0.13),
+    transparent 70%
+  );
+  transition: opacity 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.bl-card-interactive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.05) 48%,
+    transparent 72%
+  );
+  transform: translateX(-65%);
+  transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease;
+  z-index: 1;
+}
+
+.bl-card-interactive:hover {
+  border-color: var(--border-hover);
+  background-color: #16161C;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 20px 44px -18px rgba(0, 0, 0, 0.88),
+    0 0 0 1px rgba(56, 189, 248, 0.12);
+}
+
+.bl-card-interactive:hover::before {
+  opacity: 1;
+}
+
+.bl-card-interactive:hover::after {
+  opacity: 1;
+  transform: translateX(65%);
+}
+
+/* Focus visibility */
+*:focus-visible {
+  outline: 2px solid #38BDF8;
+  outline-offset: 2px;
+}
+
+/* Subtle scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 170, 0.22);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(161, 161, 170, 0.4);
+}
+
+/* Subtle Ambient & Event Keyframes (Compositor-only: transform & opacity) */
+@keyframes bl-ambient-float {
+  0%, 100% {
+    transform: translate3d(-50%, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(-50%, 10px, 0) scale(1.04);
+    opacity: 0.92;
+  }
+}
+
+@keyframes bl-particle-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--dx, 8px), var(--dy, -14px), 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes bl-star-twinkle {
+  0%, 100% {
+    opacity: var(--base-op, 0.12);
+  }
+  50% {
+    opacity: var(--peak-op, 0.36);
+  }
+}
+
+@keyframes bl-boundary-sweep {
+  0% {
+    transform: translateX(-110%) skewX(-18deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(130%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bl-dot-ripple {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.bl-ambient-orb {
+  animation: bl-ambient-float 22s ease-in-out infinite;
+}
+
+.bl-particle {
+  animation: bl-particle-float var(--dur, 20s) ease-in-out infinite,
+             bl-star-twinkle var(--twinkle, 8s) ease-in-out infinite;
+}
+
+.bl-sweep {
+  animation: bl-boundary-sweep 780ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bl-ripple {
+  animation: bl-dot-ripple 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bl-ambient-orb,
+  .bl-particle,
+  .bl-sweep,
+  .bl-ripple {
+    animation: none !important;
+  }
+  .bl-card-interactive::after {
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "BOUNDARYLIVE",
+  "description": "Premium live cricket scoreboard, ball-by-ball broadcast match centre, scorecards, squads, and tournament standings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
