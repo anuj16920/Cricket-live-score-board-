@@ -1,6 +1,6 @@
 import type { CricketDataProvider } from './types';
-import { DemoCricketProvider } from './demoProvider';
-import { SportmonksCricketProvider } from './sportmonksProvider';
+import { DemoCricketProvider } from './demoProvider.js';
+import { SportmonksCricketProvider } from './sportmonksProvider.js';
 
 let singletonProvider: CricketDataProvider | null = null;
 

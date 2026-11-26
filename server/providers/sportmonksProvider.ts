@@ -26,7 +26,7 @@ import {
   classifyDelivery,
   oversToBalls,
   toMatchSummary,
-} from '../../src/utils/cricketMath';
+} from '../../src/utils/cricketMath.js';
 import type { CricketDataProvider } from './types';
 
 const ALLOWED_BASE_URL = 'https://cricket.sportmonks.com/api/v2.0';

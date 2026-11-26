@@ -6,9 +6,9 @@ import type {
   MatchSummary,
   TournamentStandings,
 } from '../../src/types/cricket';
-import { applyDeliveryToMatch, toMatchSummary } from '../../src/utils/cricketMath';
+import { applyDeliveryToMatch, toMatchSummary } from '../../src/utils/cricketMath.js';
 import type { CricketDataProvider } from './types';
-import { createDemoStandings, createInitialDemoMatches } from './demoData';
+import { createDemoStandings, createInitialDemoMatches } from './demoData.js';
 
 const WEIGHTED_DELIVERY_POOL: BallEventType[] = [
   'DOT',
